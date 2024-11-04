@@ -126,7 +126,10 @@ def group_education_levels(x):
 
 @st.cache_data
 def load_data():
-    df = pd.read_csv("survey_results_public.csv")
+    data_part1 = pd.read_csv("survey_results_part1.csv")
+    data_part2 = pd.read_csv("survey_results_part2.csv")
+    df = pd.concat([data_part1, data_part2], ignore_index=True)
+    
     df = df[df["CompTotal"].notnull()]
 
     country_map = clean_country(df.Country.value_counts(), 400)
